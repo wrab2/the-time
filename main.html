@@ -1,0 +1,48 @@
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script>
+        let date2 = 0
+        function shownext(){
+            let effectivex = document.getElementById('x').value
+            let hh = document.getElementById('hh').value
+            let mm = document.getElementById('mm').value
+            let ss = document.getElementById('ss').value
+            let date = moment({ hour :hh, minute :mm, second :ss})
+            console.log(date.format('HH:mm:ss'))
+
+            for (let i = 0; i < 30; i++) {
+                date2 = date.add(effectivex, 's')
+                document.getElementById('next').append(date2.format('HH:mm:ss'), " " )
+            }
+
+
+        }
+     </script>
+</head>
+
+<body>
+
+     <style>
+        input {
+  height: 20px;
+  width: 60px;
+  border: 1px, black;
+}
+.next {
+    word-spacing: 9999999px; 
+}
+     </style>
+    <label for="x">current effective X:</label>
+    <input type="number" id="x"></br>
+    <label>current time:</label>
+    <input type="text" id="hh" maxlength="2" placeholder="hh">
+    <input type="text" id="mm" maxlength="2" placeholder="mm">
+    <input type="text" id="ss" maxlength="2" placeholder="ss">
+<div id="button">
+     <button onclick='shownext()'>show next</button>
+</div>
+<div>
+<p id="next"></p>
+</div>
+
+</body>
