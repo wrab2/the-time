@@ -4,18 +4,23 @@
         let date2 = 0
         function set() {
             effectivex = document.getElementById('x').value
+            days = document.getElementById('dd').value
+            if (days == '') { days = 0 }
             let hh = document.getElementById('hh').value
             let mm = document.getElementById('mm').value
             let ss = document.getElementById('ss').value
             date = moment({ hour :hh, minute :mm, second :ss})
-            console.log(date.format('HH:mm:ss'))
         }
         
-        function shownext() {
+          function shownext() {
             document.getElementById('next').innerHTML = " "
             for (let i = 0; i < 30; i++) {
+                compare = date.hour()
                 date = date.add(effectivex, 's')
-                document.getElementById('next').innerHTML += date.format('HH:mm:ss') + "<br/>"
+                if (date.hour() < compare) {
+                    days++
+                }
+                document.getElementById('next').innerHTML += days + ":" + date.format('HH:mm:ss') + "<br/>"
             }
         }
      </script>
@@ -36,6 +41,7 @@
     <label for="x">current effective X:</label>
     <input type="number" id="x"></br>
     <label>current time:</label>
+    <input type="text" id="dd" placeholder="dd">
     <input type="text" id="hh" maxlength="2" placeholder="hh">
     <input type="text" id="mm" maxlength="2" placeholder="mm">
     <input type="text" id="ss" maxlength="2" placeholder="ss">
@@ -44,7 +50,7 @@
      <button onclick='shownext()'>show next</button>
 </div>
 <div id="next">
-<p ></p>
+
 </div>
 
 </body>
