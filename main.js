@@ -1,25 +1,39 @@
 let dateStamp = 0
+function getPosition(string, index) {
+  return string.split(':', index).join(':').length;
+}
 function set() {
   x = document.getElementById('x').value*1
-  let d = document.getElementById('d').value*86400
-  let h = document.getElementById('h').value*3600
-  let m = document.getElementById('m').value*60
-  let s = document.getElementById('s').value*1
-  if (x === '') x = 0 
-  if (d === '') d = 0 
-  if (h === '') h = 0 
-  if (m === '') m = 0 
-  if (s === '') s = 0 
-  dateStamp = JSON.parse(d+h+m+s)
+  let str = document.getElementById('timein').value
+  str = ":".concat(str)
+  smhd = str.match(new RegExp(':', 'g')).length;
+  let s = 0
+  let m = 0
+  let h = 0
+  let d = 0
+  for (let i=0; i<smhd; i++){
+  if (i===0){
+    s = (str.substring(getPosition(str, smhd)+1, str.length))*1
+  }
+  if (i===1){
+    m = (str.substring(getPosition(str, smhd-1)+1, getPosition(str, smhd)))*60
+  }
+  if (i===2){
+    h = (str.substring(getPosition(str, smhd-2)+1, getPosition(str, smhd-1)))*3600
+  }
+  if (i===3){
+    d = (str.substring(getPosition(str, smhd-3)+1, getPosition(str, smhd-2)))*86400
+  }
 }
-
+dateStamp = (d+h+m+s)
+}
 function shownext() {
   document.getElementById('next').innerHTML = " "
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 16; i++) {
       dateStamp += x
       document.getElementById('next').innerHTML += 
-      //style="user-select:none"
-      '<div class='+(i%2==1?"":"light")+">" + 
+          //vvv  style="user-select:none"
+      '<div     class='+(i%2==1?"":"light")+">" + 
       (dateStamp>=86400?Math.floor(dateStamp/86400)+":":"") +
 
       (Math.floor(dateStamp/3600)%24<10?"0":"") +
