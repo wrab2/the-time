@@ -2,10 +2,11 @@ let dateStamp = 0
 function getPosition(string, index) {
   return string.split(':', index).join(':').length;
 }
+const wh = ['timein','x']
 function set() {
-  x = document.getElementById('x').value*1
-  let str = document.getElementById('timein').value
-  str = ":".concat(str)
+for (let g=0; g<2; g++){  
+  let str = document.getElementById(wh[g]).value
+    str = ":".concat(str)
   smhd = str.match(new RegExp(':', 'g')).length;
   let s = 0
   let m = 0
@@ -25,7 +26,9 @@ function set() {
     d = (str.substring(getPosition(str, smhd-3)+1, getPosition(str, smhd-2)))*86400
   }
 }
-dateStamp = (d+h+m+s)
+if(g===0){dateStamp = (d+h+m+s)}
+else{x = (d+h+m+s)}
+}
 }
 function shownext() {
   document.getElementById('next').innerHTML = " "
