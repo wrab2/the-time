@@ -1,0 +1,36 @@
+<head>
+  <title>Good and secure password generator</title>
+</head>
+<script>
+const first  = "2367qwaszxbnghtyopQWASZXTYGHBNPL"
+const second = "4589erdfcvuijkmERDFCVUJKM"
+var tmp=[]
+function genpass(){
+let pawd=""
+let arr1=first
+let arr2=second
+for (let i=0; i<8;i++){
+  if(i===3){pawd=pawd.concat((Math.floor(Math.random()*8))+2)}
+  else if (i%2==0){
+      x=Math.floor(Math.random()*arr1.length)
+      pawd=pawd.concat(arr1.charAt(x))
+        tmp = arr1.split('');
+        tmp.splice(x, 1);
+        arr1 = tmp.join('');
+      }
+  else {
+      x=Math.floor(Math.random()*arr2.length)
+      pawd=pawd.concat(arr2.charAt(x))
+        tmp = arr2.split('');
+        tmp.splice(x, 1);
+        arr2 = tmp.join('');
+    }
+}
+document.getElementById("password").innerHTML=pawd
+navigator.clipboard.writeText(pawd)
+}
+</script>
+<body>
+  <button onclick="genpass()">!++++!</button>
+  <span id="password"></span>
+</body>
