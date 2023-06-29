@@ -27,10 +27,10 @@ for (let g=0; g<2; g++){
     d = (str.substring(getPosition(str, smhd-3)+1, getPosition(str, smhd-2)))*86400
   }
   if (i===4){
-    d = (str.substring(getPosition(str, smhd-4)+1, getPosition(str, smhd-3)))*31536000
+    y = (str.substring(getPosition(str, smhd-4)+1, getPosition(str, smhd-3)))*31536000
   }
 }
-if(g===0){dateStamp = (d+h+m+s)}
+if(g===0){dateStamp = (y+d+h+m+s)}
 else{x = (y+d+h+m+s)}
 }
 }
