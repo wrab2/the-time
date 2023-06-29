@@ -12,6 +12,7 @@ for (let g=0; g<2; g++){
   let m = 0
   let h = 0
   let d = 0
+  let y = 0
   for (let i=0; i<smhd; i++){
   if (i===0){
     s = (str.substring(getPosition(str, smhd)+1, str.length))*1
@@ -25,9 +26,12 @@ for (let g=0; g<2; g++){
   if (i===3){
     d = (str.substring(getPosition(str, smhd-3)+1, getPosition(str, smhd-2)))*86400
   }
+  if (i===4){
+    d = (str.substring(getPosition(str, smhd-3)+1, getPosition(str, smhd-2)))*31536000
+  }
 }
 if(g===0){dateStamp = (d+h+m+s)}
-else{x = (d+h+m+s)}
+else{x = (y+d+h+m+s)}
 }
 }
 function shownext() {
@@ -37,7 +41,8 @@ function shownext() {
       document.getElementById('next').innerHTML += 
           //vvv  style="user-select:none"
       '<div     class='+(i%2==1?"":"light")+">" + 
-      (dateStamp>=86400?Math.floor(dateStamp/86400)+":":"") +
+      (dateStamp>=31536000?Math.floor(dateStamp/31536000)+":":"") +
+      (dateStamp>=86400?Math.floor(dateStamp/86400%365)+":":"") +
 
       (Math.floor(dateStamp/3600)%24<10?"0":"") +
       Math.floor(dateStamp/3600)%24 + ":" +
